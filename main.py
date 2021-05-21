@@ -5,7 +5,8 @@ from sqlalchemy_pagination import paginate
 
 app = Flask(__name__)
 
-db = SQLAlchemy("sqlite:///db.sqlite")
+db_url = os.getenv("DATABASE_URL", "sqlite:///db.sqlite").replace("postgres://", "postgresql://", 1)
+db = SQLAlchemy(db_url)
 
 class Mensagem(db.Model):
     id = db.Column(db.Integer, primary_key=True)
