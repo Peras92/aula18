@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Aplicação de chat</title>
+</head>
+<body>
+    <h1>Um chat simples</h1>
+
+    <form action="/add-message" method="POST">
+        <input name="utilizador" placeholder="O teu nome">
+        <br><br>
+        
+        <textarea placeholder="Escreve a tua mensagem" name="texto" rows="10" cols="30"></textarea>
+        
+        <br><br>
+
+        <button type="submit">Enviar mensagem</button>
+
+    </form>
+
+    <h2>Mensagens deixadas:</h2>
+
+    {% for i in mensagem %}
+    <p>
+        <strong>{{i.utilizador}}:</strong> {{i.texto}}
+    </p>
+    {% endfor %}
+
+</body>
+</html>
