@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for
 from sqla_wrapper import SQLAlchemy
 import os
-from sqlalchemy_pagination import paginate
 
 app = Flask(__name__)
 
@@ -19,16 +18,7 @@ db.create_all()
 
 @app.route("/")
 def index():
-
-    page = request.args.get("page")
-
-    if not page:
-        page=1
-
-    mensagem_filtrada = db.query(Mensagem)
-
-    mensagem = paginate(query=mensagem_filtrada, page=int(page), page_sige=5)
-
+    mensagem = db.query(Mensagem).all()
     return render_template("index.html", mensagem=mensagem)
 
 @app.route("/add-message", methods=["POST"])
