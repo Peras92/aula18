@@ -21,18 +21,11 @@
 
     <h2>Mensagens deixadas:</h2>
 
-    {% for i in mensagem.items %}
+    {% for i in mensagem %}
     <p>
         <strong>{{i.utilizador}}:</strong> {{i.texto}}
     </p>
     {% endfor %}
-
-    <p>
-        {% for page_num in range(mensagem.pages) %}
-            <a href="/?page={{page_num+1}}">Pagina {{page_num+1}} </a>
-        {% endfor %}
-
-    </p>
 
 </body>
 </html>
