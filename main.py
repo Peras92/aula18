@@ -5,8 +5,7 @@ from sqlalchemy_pagination import paginate
 
 app = Flask(__name__)
 
-db_url = os.getenv("DATABASE_URL", "sqlite:///db.sqlite").replace("postgres://", "postgresql://", 1)
-db = SQLAlchemy(db_url)
+db = SQLAlchemy("sqlite:///db.sqlite")
 
 class Mensagem(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -17,7 +16,7 @@ db.create_all()
 
 
 
-@app.route("/")
+@app.route("/", methods=["GET"])
 def index():
 
     page = request.args.get("page")
@@ -27,7 +26,7 @@ def index():
 
     mensagem_filtrada = db.query(Mensagem)
 
-    mensagem = paginate(query=mensagem_filtrada, page=int(page), page_sige=5)
+    mensagem = paginate(query=mensagem_filtrada, page=int(page), page_size=5)
 
     return render_template("index.html", mensagem=mensagem)
 
